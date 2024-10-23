@@ -1,28 +1,36 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { createContext } from  "react" ;
 import ShoppingCartTwo from './../Components/ShoppingCart/ShoppingCart';
 import StoreProducts  from '../data/StorePRoducts.json'
 
-
 const ShoppingCart = createContext({}) ;
 
+// InaialValue To CartItems Store in LocalStorage :-----
+const intialCartItems = localStorage.getItem("shopping-cart")
+    ? JSON.parse(localStorage.getItem("shopping-cart"))
+    : [] ;
 
 // eslint-disable-next-line react/prop-types
 const ContextPovider = ({children}) => {
 
 // Items in Shopping Cart :-----
-    const [ cartItems , serCartItems  ] = useState([])
+    const [ cartItems , serCartItems  ] = useState(intialCartItems)
 
 // Open and Close Shopping Cart :-----
     const [ isOpen , setIsOpen ] = useState(false)
 
-// Function To Open Shopping Cart
+    // To Save Data in LocalStorage
+    useEffect(()=> {
+        localStorage.setItem("shopping-cart", JSON.stringify(cartItems))
+    }, [cartItems])
+
+// Function To Open Shopping Cart :-----
     const openCart = () => {
         setIsOpen(true)
     }
 
-// Function To Close Shopping Cart
+// Function To Close Shopping Cart :-----
     const closeCart = () => {
         setIsOpen(false)
     }
@@ -32,7 +40,6 @@ const ContextPovider = ({children}) => {
         const item = cartItems.find((item)=> item.id === id)
             return item ? item.quantity : 0
     }
-
 
 // Function To Increase Items :-----
     const increaseItems = (id) => {
@@ -51,7 +58,6 @@ const ContextPovider = ({children}) => {
         }) 
     }
 
-
 // Function To Decrease Items :-----
     const decreaseItems = (id) => {
         serCartItems( (currentItems) => {
@@ -68,12 +74,10 @@ const ContextPovider = ({children}) => {
         })
     }
 
-
 // Function To Remove Items :-----
     const removeItems = (id) =>{
         serCartItems((currentItems) => currentItems.filter((item)=> item.id !== id))
     }
-
 
 // Function To Calculate Total Number Of Items :-----
     const getTotalItems = () => {
@@ -87,7 +91,6 @@ const ContextPovider = ({children}) => {
             return total + ( item?.price || 0 )  * cartItem.quantity
         },0);
     }
-
 
     return (
         <ShoppingCart.Provider  

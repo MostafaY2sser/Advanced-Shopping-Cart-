@@ -6,7 +6,8 @@ import FormatCurrency from "../FormatCurrency"
 // eslint-disable-next-line react/prop-types
 const ShoppingCart = ( {isOpen} ) => {
 
-const {cartItems, closeCart, getTotalPrice} = useShoppingCart()
+    // From  Context API :-----
+    const {cartItems, closeCart, getTotalPrice} = useShoppingCart()
 
     return (
         <>

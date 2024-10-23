@@ -4,9 +4,9 @@ import { Navbar as NavbarBS , Container , Nav, Button ,  } from 'react-bootstrap
 import { NavLink } from 'react-router-dom' ;
 import { useShoppingCart } from '../../Context/Context';
 
-
 const NavBar = () => {
 
+     // From  Context API :-----
     const { openCart , getTotalItems } = useShoppingCart()
 
     return (

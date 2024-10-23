@@ -7,6 +7,7 @@ import { useShoppingCart } from "../../Context/Context"
 // eslint-disable-next-line react/prop-types
 const CartItem = ({id , quantity }) => {
 
+    // From  Context API :-----
     const {removeItems} = useShoppingCart()
 
     const item = StoreProducts.find((i) => i.id === id )

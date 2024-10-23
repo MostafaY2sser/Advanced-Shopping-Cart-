@@ -6,6 +6,7 @@ import { useShoppingCart } from '../../Context/Context';
 // eslint-disable-next-line react/prop-types
 const StoreItem = ( { id , name , price , imgUrl }) => {
 
+    // From  Context API :-----
     const {getItemQuanatity, increaseItems, decreaseItems, removeItems} = useShoppingCart()
 
     const guantity = getItemQuanatity(id) ;
